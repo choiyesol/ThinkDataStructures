@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * @author downey
+ * @authfor downey
  * @param <T>
  *
  */
@@ -23,7 +23,7 @@ public class MyArrayList<T> implements List<T> {
 		// You can't instantiate an array of T[], but you can instantiate an
 		// array of Object and then typecast it.  Details at
 		// http://www.ibm.com/developerworks/java/library/j-jtp01255/index.html
-		array = (T[]) new Object[10];
+		array = (T[]) new Object[10]; //array = new E[10]로 초기화할 수 없다.
 		size = 0;
 	}
 
@@ -44,8 +44,16 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public boolean add(T element) {
-		// TODO: FILL THIS IN!
-		return false;
+		if (size >= array.length) {
+			// make a bigger array and copy over the elements
+			@SuppressWarnings("unchecked")
+			T[] bigger = (T[]) new Object[array.length * 2];
+			System.arraycopy(array, 0, bigger, 0, array.length);
+			array = bigger;
+		}
+		array[size] = element;
+		size++;
+		return true;
 	}
 
 	@Override
@@ -110,8 +118,12 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: FILL THIS IN!
-		return -1;
+			for(int i = 0; i<size; i++){ // 요소의 개수에 따른 반복문
+				if(equals(target, array[i])){ // 파라미터 값과 비교하여 같은지 확인
+					return i; //조건에 맞으면 i
+				}
+			}
+		return -1; // 요소가 없으면
 	}
 
 	/** Checks whether an element of the array is the target.
@@ -181,8 +193,12 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public T remove(int index) {
-		// TODO: FILL THIS IN!
-		return null;
+		T element = get(index);
+		for( int i=index; i<size-1; i++){
+			array[i] = array[i+1];
+		}
+		size--;
+		return element;
 	}
 
 	@Override
@@ -201,8 +217,10 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public T set(int index, T element) {
-		// TODO: FILL THIS IN!
-		return null;
+		//HINT 인덱스를 검사하는 코드의 반복을 피해야 한다.
+		T ele = get(index);
+		array[index] = element;
+		return ele;
 	}
 
 	@Override

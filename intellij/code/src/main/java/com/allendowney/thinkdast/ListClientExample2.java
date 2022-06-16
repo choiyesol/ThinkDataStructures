@@ -1,15 +1,15 @@
 package com.allendowney.thinkdast;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListClientExample {
+public class ListClientExample2 {
 	@SuppressWarnings("rawtypes")
 	private List list;
 
 	@SuppressWarnings("rawtypes")
-	public ListClientExample() {
-		list = new LinkedList();
+	public ListClientExample2() {
+		list = new ArrayList();
 	}
 
 	@SuppressWarnings("rawtypes")

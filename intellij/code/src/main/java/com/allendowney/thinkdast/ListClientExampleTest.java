@@ -19,7 +19,7 @@ public class ListClientExampleTest {
 	 */
 	@Test
 	public void testListClientExample() {
-		ListClientExample lce = new ListClientExample();
+		ListClientExample2 lce = new ListClientExample2();
 		@SuppressWarnings("rawtypes")
 		List list = lce.getList();
 		assertThat(list, instanceOf(ArrayList.class) );
